@@ -6,15 +6,13 @@ let acertos = 0;
 const maxTentativas = 6;
 
 async function buscarPalavra() {
-  
+
   const resposta = await fetch('https://api.dicionario-aberto.net/random');
   const dados = await resposta.json();
-  
+
   palavraSecreta = dados.word.toUpperCase();
   console.log(palavraSecreta);
   dica = dados.word.substring(0, 1).toUpperCase();
-
-  
   palavraSecreta = normalizarPalavra(palavraSecreta);
 
   inicializarJogo();
@@ -23,10 +21,10 @@ async function buscarPalavra() {
 function normalizarPalavra(palavra) {
   return palavra
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "") 
-    .replace(/[-]/g, "") 
-    .replace(/Ç/g, "C") 
-    .replace(/Â/g, "A"); 
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[-]/g, "")
+    .replace(/Ç/g, "C")
+    .replace(/Â/g, "A");
 }
 
 function inicializarJogo() {
@@ -46,8 +44,8 @@ function atualizarPalavraDisplay() {
 function criarTecladoVirtual() {
   const teclado = document.getElementById('teclado');
   teclado.innerHTML = '';
-  
-  
+
+
   const alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ';
   alfabeto.split('').forEach(letra => {
     const tecla = document.createElement('div');
@@ -60,7 +58,7 @@ function criarTecladoVirtual() {
 
 function tentarLetra(letra) {
   const letraNormalizada = normalizarPalavra(letra);
-  
+
   if (palavraSecreta.includes(letraNormalizada)) {
     for (let i = 0; i < palavraSecreta.length; i++) {
       if (palavraSecreta[i] === letraNormalizada) {
@@ -103,5 +101,10 @@ function reiniciar() {
   document.getElementById('mensagem').innerText = '';
   buscarPalavra();
 }
+
+function chutarPalavra() {
+  let chute = prompt("Digite sua palavra: ");
+}
+
 
 buscarPalavra();
