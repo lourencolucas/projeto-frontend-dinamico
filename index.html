@@ -16,13 +16,16 @@
 
     <div id="palavra" class="mb-6 text-4xl font-mono tracking-widest text-gray-800"></div>
 
-    <div id="contador" class="mb-4 text-xl text-gray-700">Tentativas restantes: <span id="tentativasRestantes"></span>
+    <div id="contador" class="mb-4 text-xl text-red-500">Tentativas restantes: <span id="tentativasRestantes"></span>
     </div>
 
     <div id="teclado" class="grid grid-cols-7 gap-4"></div>
 
     <div id="mensagem" class="mt-4 text-xl font-semibold text-red-500"></div>
 
+    <button onclick="chutarPalavra()" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+      Chutar palavra
+    </button>
     <button onclick="reiniciar()" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
       Reiniciar
     </button>
