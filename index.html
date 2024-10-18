@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Forca</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-lg text-center">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Jogo da Forca</h1>
+
+    <div id="dica" class="mb-4 text-lg text-gray-600">Dica: <span id="dicaTexto" class="font-semibold"></span></div>
+
+    <div id="palavra" class="mb-6 text-4xl font-mono tracking-widest text-gray-800"></div>
+
+    <div id="contador" class="mb-4 text-xl text-gray-700">Tentativas restantes: <span id="tentativasRestantes"></span>
+    </div>
+
+    <div id="teclado" class="grid grid-cols-7 gap-4"></div>
+
+    <div id="mensagem" class="mt-4 text-xl font-semibold text-red-500"></div>
+
+    <button onclick="reiniciar()" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+      Reiniciar
+    </button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
