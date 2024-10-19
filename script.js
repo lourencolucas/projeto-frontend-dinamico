@@ -18,6 +18,7 @@ async function buscarPalavra() {
   inicializarJogo();
 }
 
+
 function normalizarPalavra(palavra) {
   return palavra
     .normalize("NFD")
@@ -48,7 +49,7 @@ function criarTecladoVirtual() {
 
   const alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ';
   alfabeto.split('').forEach(letra => {
-    const tecla = document.createElement('div');
+    const tecla = document.createElement('button');
     tecla.classList.add('tecla', 'bg-gray-200', 'hover:bg-gray-400', 'text-lg', 'p-3', 'rounded', 'cursor-pointer');
     tecla.innerText = letra;
     tecla.onclick = () => tentarLetra(letra);
