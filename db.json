@@ -1,42 +1,52 @@
 {
     "forca": [
       {
+        "id": 1,
         "palavra": "javascript",
         "dica": "Linguagem de programação utilizada no desenvolvimento web"
       },
       {
+        "id": 2,
         "palavra": "servidor",
         "dica": "Máquina que fornece serviços a outros computadores"
       },
       {
+        "id": 3,
         "palavra": "nuvem",
         "dica": "Modelo de armazenamento e processamento de dados online"
       },
       {
+        "id": 4,
         "palavra": "react",
         "dica": "Biblioteca JavaScript para construção de interfaces"
       },
       {
+        "id": 5,
         "palavra": "linux",
         "dica": "Sistema operacional baseado em código aberto"
       },
       {
+        "id": 6,
         "palavra": "oracle",
         "dica": "Empresa conhecida por seus sistemas de banco de dados"
       },
       {
+        "id": 7,
         "palavra": "docker",
         "dica": "Plataforma para automação de aplicações em containers"
       },
       {
+        "id": 8,
         "palavra": "plsql",
         "dica": "Linguagem de programação procedural para bancos de dados Oracle"
       },
       {
+        "id": 9,
         "palavra": "jenkins",
         "dica": "Ferramenta de automação para integração contínua"
       },
       {
+        "id": 10,
         "palavra": "azure",
         "dica": "Plataforma de serviços em nuvem da Microsoft"
       }
