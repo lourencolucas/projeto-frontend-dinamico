@@ -7,13 +7,23 @@ let letrasUsadas = [];
 const maxTentativas = 6; 
 
 async function buscarPalavra() { 
-    const resposta = await fetch('https://api.dicionario-aberto.net/random'); 
-    const dados = await resposta.json(); 
-    palavraSecreta = dados.word.toUpperCase(); 
-    console.log(palavraSecreta); 
-    dica = dados.word.substring(0, 1).toUpperCase(); 
-    palavraSecreta = normalizarPalavra(palavraSecreta); 
-    inicializarJogo(); 
+    try {
+        const resposta = await fetch('http://localhost:3000/forca');
+        const dados = await resposta.json();
+
+        
+        const palavraAleatoria = dados[Math.floor(Math.random() * dados.length)];
+        
+        palavraSecreta = palavraAleatoria.palavra.toUpperCase(); 
+        dica = palavraAleatoria.dica;
+
+        console.log(palavraSecreta); 
+        palavraSecreta = normalizarPalavra(palavraSecreta); 
+        inicializarJogo();
+    } catch (erro) {
+        console.error('Erro ao buscar a palavra:', erro);
+        document.getElementById('mensagem').innerText = 'Erro ao carregar a palavra. Tente novamente.';
+    }
 }
 
 function normalizarPalavra(palavra) { 
@@ -54,9 +64,10 @@ function criarTecladoVirtual() {
     }); 
 }
 
-function tentarLetra(letra, tecla) {
+function tentarLetra(letra, tecla) { 
     const letraNormalizada = normalizarPalavra(letra);
     
+    // Verifica se a letra já foi usada
     if (!letrasUsadas.includes(letra)) {
         letrasUsadas.push(letra); 
         atualizarLetrasUsadas(); 
@@ -74,7 +85,7 @@ function tentarLetra(letra, tecla) {
             atualizarTentativasRestantes(); 
             tecla.style.backgroundColor = 'red'; 
         }
-        tecla.disabled = true; 
+        tecla.disabled = true;
     }
     
     verificarFimDeJogo(); 
