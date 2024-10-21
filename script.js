@@ -1,21 +1,39 @@
+
 let palavraSecreta = ''; 
 let dica = ''; 
 let palavraDisplay = []; 
 let tentativas = 0; 
 let acertos = 0; 
-let letrasUsadas = [];
+let letrasUsadas = []; 
 const maxTentativas = 6; 
+
+function salvarEstatisticas(vitoria) {
+    let estatisticas = JSON.parse(localStorage.getItem('estatisticas')) || { vitorias: 0, derrotas: 0, totalJogos: 0 };
+    estatisticas.totalJogos++;
+    if (vitoria) {
+        estatisticas.vitorias++;
+    } else {
+        estatisticas.derrotas++;
+    }
+    localStorage.setItem('estatisticas', JSON.stringify(estatisticas));
+}
+
+function carregarEstatisticas() {
+    let estatisticas = JSON.parse(localStorage.getItem('estatisticas')) || { vitorias: 0, derrotas: 0, totalJogos: 0 };
+    document.getElementById('estatisticas').innerText = `Vitórias: ${estatisticas.vitorias}, Derrotas: ${estatisticas.derrotas}, Total de Jogos: ${estatisticas.totalJogos}`;
+}
 
 async function buscarPalavra() { 
     try {
         const resposta = await fetch('http://localhost:3000/forca');
         const dados = await resposta.json();
+        
         const palavraAleatoria = dados[Math.floor(Math.random() * dados.length)];
         
         palavraSecreta = palavraAleatoria.palavra.toUpperCase(); 
         dica = palavraAleatoria.dica;
 
-        // console.log(palavraSecreta); 
+        console.log(palavraSecreta); 
         palavraSecreta = normalizarPalavra(palavraSecreta); 
         inicializarJogo();
     } catch (erro) {
@@ -40,9 +58,9 @@ function inicializarJogo() {
     criarTecladoVirtual(); 
     tentativas = 0; 
     acertos = 0; 
-    letrasUsadas = [];
+    letrasUsadas = []; 
     atualizarTentativasRestantes(); 
-    atualizarLetrasUsadas();
+    atualizarLetrasUsadas(); 
 }
 
 function atualizarPalavraDisplay() { 
@@ -57,17 +75,18 @@ function criarTecladoVirtual() {
         const tecla = document.createElement('button'); 
         tecla.classList.add('tecla', 'bg-gray-200', 'hover:bg-gray-400', 'text-lg', 'p-3', 'rounded', 'cursor-pointer'); 
         tecla.innerText = letra; 
-        tecla.onclick = () => tentarLetra(letra, tecla);
+        tecla.onclick = () => tentarLetra(letra, tecla); 
         teclado.appendChild(tecla); 
     }); 
 }
 
-function tentarLetra(letra, tecla) {
+function tentarLetra(letra, tecla) { 
     const letraNormalizada = normalizarPalavra(letra);
     
+    // Verifica se a letra já foi usada
     if (!letrasUsadas.includes(letra)) {
-        letrasUsadas.push(letra);
-        atualizarLetrasUsadas();
+        letrasUsadas.push(letra); 
+        atualizarLetrasUsadas(); 
 
         if (palavraSecreta.includes(letraNormalizada)) { 
             for (let i = 0; i < palavraSecreta.length; i++) { 
@@ -76,11 +95,11 @@ function tentarLetra(letra, tecla) {
                     acertos++; 
                 } 
             }
-            tecla.style.backgroundColor = 'green';
+            tecla.style.backgroundColor = 'green'; 
         } else { 
             tentativas++; 
             atualizarTentativasRestantes(); 
-            tecla.style.backgroundColor = 'red';
+            tecla.style.backgroundColor = 'red'; 
         }
         tecla.disabled = true;
     }
@@ -98,9 +117,11 @@ function verificarFimDeJogo() {
     const mensagem = document.getElementById('mensagem'); 
     if (tentativas >= maxTentativas) { 
         mensagem.innerText = 'Você perdeu! A palavra era: ' + palavraSecreta; 
+        salvarEstatisticas(false); // Salva derrota
         bloquearTeclado(); 
     } else if (acertos === palavraSecreta.length) { 
         mensagem.innerText = 'Você ganhou!'; 
+        salvarEstatisticas(true); // Salva vitória
         bloquearTeclado(); 
     } 
 }
@@ -113,30 +134,19 @@ function bloquearTeclado() {
 }
 
 function atualizarLetrasUsadas() {
-    document.getElementById('letrasUsadas').innerText = letrasUsadas.join(', ');
+    document.getElementById('letrasUsadas').innerText = letrasUsadas.join(', '); 
 }
 
 function reiniciar() { 
     document.getElementById('mensagem').innerText = ''; 
-    buscarPalavra();
+    buscarPalavra(); 
 }
 
 function chutarPalavra() { 
-    let chute = prompt("Digite sua palavra: ").toUpperCase();
-
-    const chuteNormalizado = normalizarPalavra(chute);
-
-    if (chuteNormalizado === palavraSecreta) {
-        document.getElementById('mensagem').innerText = 'Você acertou a palavra completa!';
-        palavraDisplay = chute.split('');
-        acertos = palavraSecreta.length;
-        verificarFimDeJogo();
-    } else {
-        tentativas++;
-        atualizarTentativasRestantes();
-        document.getElementById('mensagem').innerText = 'Chute incorreto!';
-        verificarFimDeJogo();
-    }
+    let chute = prompt("Digite sua palavra: "); 
 }
 
-buscarPalavra();
+document.addEventListener('DOMContentLoaded', function() {
+    carregarEstatisticas(); // Exibe as estatísticas ao carregar a página
+    buscarPalavra(); // Inicia o jogo
+});
