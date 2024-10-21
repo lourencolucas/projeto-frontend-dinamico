@@ -49,7 +49,57 @@
         "id": 10,
         "palavra": "azure",
         "dica": "Plataforma de serviços em nuvem da Microsoft"
-      }
+      },
+      {
+        "id": 11,
+        "palavra": "firewall",
+        "dica": "Sistema de segurança que controla o tráfego de rede com base em regras definidas"
+      },
+      {
+        "id": 12,
+        "palavra": "switch",
+        "dica": "Dispositivo que conecta diversos dispositivos em uma rede local (LAN)"
+      },
+      {
+        "id": 13,
+        "palavra": "subnetting",
+        "dica": "Processo de dividir uma rede IP maior em redes menores"
+      },
+      {
+        "id": 14,
+        "palavra": "dns",
+        "dica": "Sistema que traduz nomes de domínio em endereços IP"
+      },
+      {
+        "id": 15,
+        "palavra": "vpn",
+        "dica": "Rede privada que utiliza a Internet para conectar sites ou usuários distantes"
+      },
+      {
+        "id": 16,
+        "palavra": "ipsec",
+        "dica": "Protocolo de segurança para comunicações via Internet que autentica e criptografa pacotes IP"
+      },
+      {
+        "id": 17,
+        "palavra": "nat",
+        "dica": "Método que permite a tradução de endereços IP privados para públicos"
+      },
+      {
+        "id": 18,
+        "palavra": "dhcp",
+        "dica": "Protocolo que atribui automaticamente endereços IP a dispositivos em uma rede"
+      },
+      {
+        "id": 19,
+        "palavra": "osi",
+        "dica": "Modelo de referência para redes que define como diferentes sistemas de comunicação interagem"
+      },
+      {
+        "id": 20,
+        "palavra": "ethernet",
+        "dica": "Tecnologia de rede mais comum usada para redes locais com fio (LAN)"
+      }      
     ]
   }
   
