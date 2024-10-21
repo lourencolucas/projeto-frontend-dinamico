@@ -17,7 +17,7 @@ async function buscarPalavra() {
         palavraSecreta = palavraAleatoria.palavra.toUpperCase(); 
         dica = palavraAleatoria.dica;
 
-        console.log(palavraSecreta); 
+        // console.log(palavraSecreta); 
         palavraSecreta = normalizarPalavra(palavraSecreta); 
         inicializarJogo();
     } catch (erro) {
