@@ -3,15 +3,13 @@ let dica = '';
 let palavraDisplay = []; 
 let tentativas = 0; 
 let acertos = 0; 
-let letrasUsadas = []; 
+let letrasUsadas = [];
 const maxTentativas = 6; 
 
 async function buscarPalavra() { 
     try {
         const resposta = await fetch('http://localhost:3000/forca');
         const dados = await resposta.json();
-
-        
         const palavraAleatoria = dados[Math.floor(Math.random() * dados.length)];
         
         palavraSecreta = palavraAleatoria.palavra.toUpperCase(); 
@@ -42,9 +40,9 @@ function inicializarJogo() {
     criarTecladoVirtual(); 
     tentativas = 0; 
     acertos = 0; 
-    letrasUsadas = []; 
+    letrasUsadas = [];
     atualizarTentativasRestantes(); 
-    atualizarLetrasUsadas(); 
+    atualizarLetrasUsadas();
 }
 
 function atualizarPalavraDisplay() { 
@@ -59,18 +57,17 @@ function criarTecladoVirtual() {
         const tecla = document.createElement('button'); 
         tecla.classList.add('tecla', 'bg-gray-200', 'hover:bg-gray-400', 'text-lg', 'p-3', 'rounded', 'cursor-pointer'); 
         tecla.innerText = letra; 
-        tecla.onclick = () => tentarLetra(letra, tecla); 
+        tecla.onclick = () => tentarLetra(letra, tecla);
         teclado.appendChild(tecla); 
     }); 
 }
 
-function tentarLetra(letra, tecla) { 
+function tentarLetra(letra, tecla) {
     const letraNormalizada = normalizarPalavra(letra);
     
-    // Verifica se a letra já foi usada
     if (!letrasUsadas.includes(letra)) {
-        letrasUsadas.push(letra); 
-        atualizarLetrasUsadas(); 
+        letrasUsadas.push(letra);
+        atualizarLetrasUsadas();
 
         if (palavraSecreta.includes(letraNormalizada)) { 
             for (let i = 0; i < palavraSecreta.length; i++) { 
@@ -79,11 +76,11 @@ function tentarLetra(letra, tecla) {
                     acertos++; 
                 } 
             }
-            tecla.style.backgroundColor = 'green'; 
+            tecla.style.backgroundColor = 'green';
         } else { 
             tentativas++; 
             atualizarTentativasRestantes(); 
-            tecla.style.backgroundColor = 'red'; 
+            tecla.style.backgroundColor = 'red';
         }
         tecla.disabled = true;
     }
@@ -116,16 +113,30 @@ function bloquearTeclado() {
 }
 
 function atualizarLetrasUsadas() {
-    document.getElementById('letrasUsadas').innerText = letrasUsadas.join(', '); 
+    document.getElementById('letrasUsadas').innerText = letrasUsadas.join(', ');
 }
 
 function reiniciar() { 
     document.getElementById('mensagem').innerText = ''; 
-    buscarPalavra(); 
+    buscarPalavra();
 }
 
 function chutarPalavra() { 
-    let chute = prompt("Digite sua palavra: "); 
+    let chute = prompt("Digite sua palavra: ").toUpperCase();
+
+    const chuteNormalizado = normalizarPalavra(chute);
+
+    if (chuteNormalizado === palavraSecreta) {
+        document.getElementById('mensagem').innerText = 'Você acertou a palavra completa!';
+        palavraDisplay = chute.split('');
+        acertos = palavraSecreta.length;
+        verificarFimDeJogo();
+    } else {
+        tentativas++;
+        atualizarTentativasRestantes();
+        document.getElementById('mensagem').innerText = 'Chute incorreto!';
+        verificarFimDeJogo();
+    }
 }
 
 buscarPalavra();
