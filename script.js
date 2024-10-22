@@ -6,6 +6,18 @@ let acertos = 0;
 let letrasUsadas = []; 
 const maxTentativas = 6;
 
+const openModalBtn = document.getElementById('openModal');
+const closeModalBtn = document.getElementById('closeModal');
+const modal = document.getElementById('modal');
+
+openModalBtn.addEventListener('click', () => {
+  modal.classList.remove('hidden');
+});
+
+closeModalBtn.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
+
 function salvarEstatisticas(vitoria) { 
     let estatisticas = JSON.parse(localStorage.getItem('estatisticas')) || { vitorias: 0, derrotas: 0, totalJogos: 0 }; 
     estatisticas.totalJogos++; 
@@ -136,7 +148,9 @@ function reiniciar() {
 }
 
 function chutarPalavra() {
-    let chute = prompt("Digite sua palavra: ").toUpperCase();
+    // let chute = prompt("Digite sua palavra: ").toUpperCase();
+    let palavra = document.getElementById('word');
+    let chute = palavra.value.toUpperCase();
     
     const chuteNormalizado = normalizarPalavra(chute);
     
