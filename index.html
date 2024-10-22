@@ -6,32 +6,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Zh23RjwiIT30y6OwBGR4L1jR6G0ymS3c0AePzECbTE2gA3KOMz0p7V8h6Jf3gkzM" crossorigin="anonymous">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5f0e1, #e0d3c8);
+      font-family: 'Courier New', Courier, monospace; 
+    }
+    .container {
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    #modal {
+      transition: opacity 0.5s ease; 
+      background: rgba(0, 0, 0, 0.5);
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div class="bg-white shadow-lg rounded-lg p-8 w-lg text-center">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">Jogo da Forca</h1>
+<body class="flex items-center justify-center h-screen">
+  <div class="container bg-white shadow-lg rounded-lg p-8 w-lg text-center">
+    <h1 class="text-4xl font-bold mb-6 text-gray-800">🎩 Jogo da Forca 🎩</h1>
 
     <div id="dica" class="mb-4 text-lg text-gray-600">Dica: <span id="dicaTexto" class="font-semibold"></span></div>
 
-    <div id="palavra" class="mb-6 text-4xl font-mono tracking-widest text-gray-800"></div>
+    <div id="palavra" class="mb-6 text-5xl font-mono tracking-widest text-gray-800"></div>
 
-    <div id="contador" class="mb-4 text-xl text-gray-800">Letras usadas: <span id="letrasUsadas"></span>
-    </div>
-    <div id="contador" class="mb-4 text-xl text-red-500">Tentativas restantes: <span id="tentativasRestantes"></span>
-    </div>
+    <div class="mb-4 text-xl text-gray-800">Letras usadas: <span id="letrasUsadas"></span></div>
+    <div class="mb-4 text-xl text-red-500">Tentativas restantes: <span id="tentativasRestantes"></span></div>
 
-    <div id="teclado" class="grid grid-cols-7 gap-4"></div>
+    <div id="teclado" class="grid grid-cols-7 gap-4 mb-6"></div>
 
     <div id="mensagem" class="mt-4 text-xl font-semibold text-red-500"></div>
-    <div id="estatisticas"></div>
+    <div id="estatisticas" class="mt-4"></div>
 
     <button onclick="reiniciar()" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
       Reiniciar
     </button>
+
+    <!-- Botão para abrir o modal de chutar a palavra -->
     <button id="openModal" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
       Chutar Palavra
     </button>
+
+    <!-- Modal -->
     <div id="modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
       <div class="flex items-center justify-center min-h-screen">
         <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
@@ -43,15 +69,15 @@
               </svg>
             </button>
           </div>
-          <form id="wordForm">
+          <form id="wordForm" onsubmit="chutarPalavra(event)">
             <div class="mb-4">
               <label for="word" class="block text-gray-700 font-bold mb-2">Palavra:</label>
               <input type="text" id="word" name="word"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Digite a palavra">
+                placeholder="Digite a palavra" required>
             </div>
             <div class="flex justify-end">
-              <button onclick="chutarPalavra()" type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+              <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
                 Salvar
               </button>
             </div>
@@ -59,11 +85,10 @@
         </div>
       </div>
     </div>
+    <!-- Fim do modal -->
   </div>
 
   <script src="script.js"></script>
 </body>
-
-
 
 </html>
