@@ -162,7 +162,7 @@ function chutarPalavra() {
     } else {
         tentativas++;
         atualizarTentativasRestantes();
-        document.getElementById('mensagem').innerText = 'Chute incorreto!';
+        document.getElementById('mensagem').innerText = 'Chute incorreto, tente novamente.';
         verificarFimDeJogo();
     }
 }
