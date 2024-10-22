@@ -128,6 +128,11 @@ function verificarFimDeJogo() {
         mensagem.innerText = 'Você ganhou!'; 
         salvarEstatisticas(true); 
         bloquearTeclado(); 
+        confetti({
+            particleCount: 100,   // Número de partículas
+            spread: 70,           // Ângulo de dispersão
+            origin: { y: 0.6 },   // Posição inicial do confetti (altura)
+        });
     } 
 }
 
