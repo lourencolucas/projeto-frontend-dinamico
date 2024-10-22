@@ -129,9 +129,9 @@ function verificarFimDeJogo() {
         salvarEstatisticas(true); 
         bloquearTeclado(); 
         confetti({
-            particleCount: 100,   // Número de partículas
-            spread: 70,           // Ângulo de dispersão
-            origin: { y: 0.6 },   // Posição inicial do confetti (altura)
+            particleCount: 500,   
+            spread: 70,           
+            origin: { y: 0.6 },  
         });
     } 
 }
