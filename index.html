@@ -27,15 +27,51 @@
     <div id="estatisticas"></div>
 
 
-    <button onclick="chutarPalavra()" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+    <!-- <button onclick="chutarPalavra()"
+      class="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
       Chutar palavra
-    </button>
+    </button> -->
     <button onclick="reiniciar()" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
       Reiniciar
     </button>
+    <!-- modal -->
+    <button id="openModal" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+      Chutar Palavra
+    </button>
+    <div id="modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-gray-800">Chutar Palavra</h2>
+            <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <form id="wordForm">
+            <div class="mb-4">
+              <label for="word" class="block text-gray-700 font-bold mb-2">Palavra:</label>
+              <input type="text" id="word" name="word"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Digite a palavra">
+            </div>
+            <div class="flex justify-end">
+              <button onclick="chutarPalavra()" type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                Salvar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fim modal -->
   </div>
 
   <script src="script.js"></script>
 </body>
+
+
 
 </html>
