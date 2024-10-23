@@ -18,22 +18,6 @@ closeModalBtn.addEventListener('click', () => {
   modal.classList.add('hidden');
 });
 
-function salvarEstatisticas(vitoria) { 
-    let estatisticas = JSON.parse(localStorage.getItem('estatisticas')) || { vitorias: 0, derrotas: 0, totalJogos: 0 }; 
-    estatisticas.totalJogos++; 
-    if (vitoria) { 
-        estatisticas.vitorias++; 
-    } else { 
-        estatisticas.derrotas++; 
-    } 
-    localStorage.setItem('estatisticas', JSON.stringify(estatisticas)); 
-    carregarEstatisticas(); 
-}
-
-function carregarEstatisticas() { 
-    let estatisticas = JSON.parse(localStorage.getItem('estatisticas')) || { vitorias: 0, derrotas: 0, totalJogos: 0 }; 
-    document.getElementById('estatisticas').innerText = `Vitórias: ${estatisticas.vitorias}, Derrotas: ${estatisticas.derrotas}, Total de Jogos: ${estatisticas.totalJogos}`; 
-}
 
 async function buscarPalavra() { 
     try { 
@@ -170,6 +154,23 @@ function chutarPalavra() {
         document.getElementById('mensagem').innerText = 'Chute incorreto, tente novamente.';
         verificarFimDeJogo();
     }
+}
+
+function salvarEstatisticas(vitoria) { 
+    let estatisticas = JSON.parse(localStorage.getItem('estatisticas')) || { vitorias: 0, derrotas: 0, totalJogos: 0 }; 
+    estatisticas.totalJogos++; 
+    if (vitoria) { 
+        estatisticas.vitorias++; 
+    } else { 
+        estatisticas.derrotas++; 
+    } 
+    localStorage.setItem('estatisticas', JSON.stringify(estatisticas)); 
+    carregarEstatisticas(); 
+}
+
+function carregarEstatisticas() { 
+    let estatisticas = JSON.parse(localStorage.getItem('estatisticas')) || { vitorias: 0, derrotas: 0, totalJogos: 0 }; 
+    document.getElementById('estatisticas').innerText = `Vitórias: ${estatisticas.vitorias}, Derrotas: ${estatisticas.derrotas}, Total de Jogos: ${estatisticas.totalJogos}`; 
 }
 
 document.addEventListener('DOMContentLoaded', function() { 
